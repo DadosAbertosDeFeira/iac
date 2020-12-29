@@ -1,0 +1,15 @@
+# from galaxy
+- src: dokku_bot.ansible_dokku
+
+# from galaxy
+- src: geerlingguy.swap
+
+# from GitLab or other git-based scm
+#- src: git@github.com:DadosAbertosDeFeira/ansible-base.git
+#  scm: git
+#  version: "0.1" 
+
+# from GitLab or other git-based scm
+#- src: git@github.com:dokku/ansible-dokku.git
+#  scm: git
+#  version: "v2020.11.25" 

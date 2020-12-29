@@ -1,0 +1,2 @@
+[web]
+web1              ansible_host=nome_do_host_aqui ansible_port=porta_aqui

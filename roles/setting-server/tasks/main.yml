@@ -4,7 +4,9 @@
   import_role:
     name: dokku_bot.ansible_dokku
   vars:
-    dokku_version: 0.22.2
+    dokku_version: 0.22.5
+    ## pinning sshcommand version to support dokku version greater than 0.22.2 
+    sshcommand_version: 0.12.0
     dokku_plugins:
       - name: clone
         url: https://github.com/crisward/dokku-clone.git

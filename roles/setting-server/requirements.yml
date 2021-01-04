@@ -1,0 +1,7 @@
+- src: dokku_bot.ansible_dokku
+
+- src: geerlingguy.swap
+
+- src: git@github.com:dokku/ansible-dokku.git
+  scm: git
+  version: "v2020.11.25"

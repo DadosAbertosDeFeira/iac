@@ -15,7 +15,7 @@ Aqui teremos a lista de tarefas e qualquer documento necessário pra ajudar pess
     ```
     $ python3 -m virtualenv .venv
     $ source .venv/bin/activate
-    $ pip install "molecule[docker,lint"
+    $ pip install "molecule[docker,lint]"
     ```
 
  - Testing roles

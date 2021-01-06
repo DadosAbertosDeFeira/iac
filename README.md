@@ -7,7 +7,7 @@ Aqui teremos a lista de tarefas e qualquer documento necessário pra ajudar pess
 
 ## Desenvolvimento
 
-### Prereqs:
+### Requisitos
 
  - Python 3 [installed](https://www.python.org/downloads/)
  - Molecule [installed](https://molecule.readthedocs.io/en/latest/installation.html):

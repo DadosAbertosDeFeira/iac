@@ -5,7 +5,7 @@ Esse repositório por hora servirá de espaço para organização do time de inf
 
 Aqui teremos a lista de tarefas e qualquer documento necessário pra ajudar pessoas a começarem a ajudar.
 
-## Development:
+## Desenvolvimento
 
 ### Prereqs:
 

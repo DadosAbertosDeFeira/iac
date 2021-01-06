@@ -13,7 +13,7 @@ Aqui teremos a lista de tarefas e qualquer documento necessário pra ajudar pess
  - Molecule [installed](https://molecule.readthedocs.io/en/latest/installation.html):
 
     ```
-    $ python3 -m virtualenv .venv
+    $ python3 -m venv .venv
     $ source .venv/bin/activate
     $ pip install "molecule[docker,lint]"
     ```

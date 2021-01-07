@@ -8,7 +8,7 @@ Aqui teremos a lista de tarefas e qualquer documento necessário pra ajudar pess
 
 Você precisa ter o ansible instalado em sua máquina ou executá-lo em um contêiner docker.
 
-Primeiro é necessário instalar as roles necessárias com o comando
+Primeiro é necessário instalar as roles necessárias com o comando:
 
 ```
 ansible-galaxy install -r requirements.yml

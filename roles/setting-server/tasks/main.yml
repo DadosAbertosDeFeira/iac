@@ -1,11 +1,9 @@
 ---
-# tasks file for setting-server
-- name: import dokku_bot.ansible_dokku role
+- name: Importando a role dokku_bot.ansible_dokku
   import_role:
     name: dokku_bot.ansible_dokku
   vars:
     dokku_version: 0.22.5
-    ## pinning sshcommand version to support dokku version greater than 0.22.2 
     sshcommand_version: 0.12.0
     dokku_plugins:
       - name: clone
@@ -17,27 +15,23 @@
 #   import_role:
 #     name: geerlingguy.swap
 
-- name: create app
+- name: Criando o app
   dokku_app:
-    # change this name in your template!
     app: &appname teste
 
-- name: environment configuration
+- name: Configurando o ambiente
   dokku_config:
     app: *appname
     config:
-      # specify a email for dokku-letsencrypt
       DOKKU_LETSENCRYPT_EMAIL: linux.rafa@gmail.com
-      # specify port so `domains` can setup the port mapping properly
       PORT: "5000"
 
 - name: git clone
-  # note you'll need to add a deployment key to the GH repo if it's private!
   dokku_clone:
     app: *appname
     repository: https://github.com/DadosAbertosDeFeira/maria-quiteria.git main
 
-- name: add domain
+- name: Adicionando domain
   dokku_domains:
     app: *appname
     domains:

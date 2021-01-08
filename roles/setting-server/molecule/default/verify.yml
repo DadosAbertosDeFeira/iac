@@ -1,10 +1,8 @@
 ---
-# This is an example playbook to execute Ansible tests.
-
-- name: Verify
+- name: Excutando o Verify
   hosts: all
   gather_facts: false
   tasks:
-  - name: Example assertion
+  - name: Examplo de assertion
     assert:
       that: true

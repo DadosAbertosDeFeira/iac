@@ -2,7 +2,7 @@
 - name: Converge
   hosts: all
   pre_tasks:
-    - name: Update apt cache
+    - name: Atualiza apt cache
       apt:
         update_cache: yes
         cache_valid_time: 3600

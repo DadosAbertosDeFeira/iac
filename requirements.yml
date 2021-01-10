@@ -1,9 +1,6 @@
 # Do galaxy
 - src: dokku_bot.ansible_dokku
 
-# Do galaxy
-- src: geerlingguy.swap
-
 # Do repositório github que tem a role básica
 - src: git@github.com:DadosAbertosDeFeira/iac-role-basica.git
   scm: git

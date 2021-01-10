@@ -1,3 +1,4 @@
 hosts
 .venv
 roles
+molecule/*/tests/__pycache__

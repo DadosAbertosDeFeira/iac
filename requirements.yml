@@ -1,15 +1,10 @@
-# from galaxy
+# Do galaxy
 - src: dokku_bot.ansible_dokku
 
-# from galaxy
+# Do galaxy
 - src: geerlingguy.swap
 
-# from GitLab or other git-based scm
-#- src: git@github.com:DadosAbertosDeFeira/ansible-base.git
-#  scm: git
-#  version: "0.1" 
-
-# from GitLab or other git-based scm
-#- src: git@github.com:dokku/ansible-dokku.git
-#  scm: git
-#  version: "v2020.11.25" 
+# Do repositório github que tem a role básica
+- src: git@github.com:DadosAbertosDeFeira/iac-role-basica.git
+  scm: git
+  version: "0.1" 

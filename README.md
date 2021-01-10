@@ -6,7 +6,16 @@ Aqui teremos a lista de tarefas e qualquer documento necessário pra ajudar pess
 
 # Como executar
 
-Você precisa ter o ansible instalado em sua máquina ou executá-lo em um contêiner docker.
+## Requisitos:
+Instale o Python 3
+
+Instale o ansible usando venv:
+
+```
+python3 -m venv .venv
+source .venv/bin/activate
+pip install ansible
+```
 
 Primeiro é necessário instalar as roles necessárias com o comando:
 

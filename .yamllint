@@ -1,0 +1,17 @@
+---
+extends: default
+ignore: |
+  .github/
+  meta/
+
+rules:
+  braces:
+    max-spaces-inside: 1
+    level: error
+  brackets:
+    max-spaces-inside: 1
+    level: error
+  line-length: disable
+  truthy:
+    allowed-values: ['true', 'false', 'yes', 'no']
+    check-keys: true

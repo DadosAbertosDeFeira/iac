@@ -3,6 +3,6 @@
 - src: dokku_bot.ansible_dokku
 
 # Do repositório github que tem a role básica
-- src: git@github.com:DadosAbertosDeFeira/iac-role-basica.git
+- src: https://github.com/DadosAbertosDeFeira/iac-role-basica.git
   scm: git
   version: "0.1"

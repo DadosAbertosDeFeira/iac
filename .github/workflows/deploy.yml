@@ -1,0 +1,20 @@
+
+---
+name: Deploy
+on: [push, pull_request]
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up python 3.
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - name: Install Ansible
+        run: python3 -m pip install ansible
+      - name: Create ansible inventory
+        run: echo "[web]\nweb1 ansible_host=nome_do_host_aqui ansible_port=porta_aqui" > hosts
+      - name: Deploy playbook to server
+        run:  ansible-playbook playbook.yml -i hosts

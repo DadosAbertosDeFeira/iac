@@ -40,7 +40,7 @@
           PORT: "5000"
           DATABASE_URL: ""
           CLOUDAMQP_URL: ""
-          CLOUDAMQP_APIKEY:
+          CLOUDAMQP_APIKEY: ""
           CITY_COUNCIL_WEBSERVICE: "https://www.transparencia.feiradesantana.ba.leg.br/"
           DJANGO_ALLOWED_HOSTS: "0.0.0.0,mariaquiteria.gomex.me,.gomex.me"
           DJANGO_CONFIGURATION: "Prod"

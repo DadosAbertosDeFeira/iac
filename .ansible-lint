@@ -1,6 +1,10 @@
 parseable: true
-quiet: true
 skip_list:
   - '204'
 use_default_rules: true
 verbosity: 1
+exclude_paths:
+  - ./roles/dokku_bot.ansible_dokku/
+  - ./roles/geerlingguy.docker/
+  - ./roles/nginxinc.nginx/
+  - ./roles/iac-role-basica/

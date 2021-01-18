@@ -3,6 +3,8 @@ extends: default
 ignore: |
   .github/
   meta/
+  roles/*.*/
+  roles/iac-role-basica/
 
 rules:
   braces:
@@ -13,5 +15,12 @@ rules:
     level: error
   line-length: disable
   truthy:
-    allowed-values: ['true', 'false', 'yes', 'no']
+    allowed-values: [
+      'False',
+      'false',
+      'true',
+      'True',
+      'no',
+      'yes'
+    ]
     check-keys: true

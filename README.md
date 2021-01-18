@@ -53,3 +53,7 @@ ansible-galaxy install -r requirements.yml
 ```
 
 Depois, crie um inventário para a máquina de teste. No repositório há um inventário de exemplo em *hosts.example*. Recomenda-se utilizar uma máquina com Ubuntu 18.04.
+
+```
+ansible-playbook -i hosts playbook.yml
+```

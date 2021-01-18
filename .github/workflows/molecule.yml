@@ -18,6 +18,7 @@ jobs:
         run: |
           python3 -m pip install --upgrade pip
           python3 -m pip install -r requirements.txt
+          ansible-galaxy install -r requirements.yml --roles-path ./roles
       - name: Test with molecule
         run:  molecule test
         env:

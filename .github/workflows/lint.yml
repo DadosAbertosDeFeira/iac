@@ -19,6 +19,7 @@ jobs:
           sudo apt install docker
           python3 -m pip install --upgrade pip
           python3 -m pip install -r requirements.txt
+          ansible-galaxy install -r requirements.yml --roles-path ./roles
       - name: Run linters
         run: |
           ansible-lint

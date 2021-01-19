@@ -3,8 +3,7 @@ extends: default
 ignore: |
   .github/
   meta/
-  roles/*.*/
-  roles/iac-role-basica/
+  roles/
 
 rules:
   braces:

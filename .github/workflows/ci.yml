@@ -1,0 +1,73 @@
+---
+name: CI
+on: [push, pull_request]
+jobs:
+  linter:
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        python-version: [3.6, 3.7]
+    
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          sudo apt install docker
+          python3 -m pip install --upgrade pip
+          python3 -m pip install -r requirements.txt
+          ansible-galaxy install -r requirements.yml
+      - name: Run linters
+        run: |
+          ansible-lint
+          yamllint .
+
+  molecule:
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        python-version: [3.6, 3.7]
+    
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install -r requirements.txt
+          ansible-galaxy install -r requirements.yml
+      - name: Test with molecule
+        run:  molecule test
+        env:
+          PY_COLORS: '1'
+          ANSIBLE_FORCE_COLOR: '1'
+
+  deploy:
+    runs-on: ubuntu-18.04
+    if: github.ref == 'refs/heads/main'
+   
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up python 3
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - name: Install dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install -r requirements.txt
+          ansible-galaxy install -r requirements.yml
+      - name: Create ansible inventory
+        run: |
+          echo "[web]" >> hosts
+          echo ${{ secrets.INVENTORY_HOSTS }} >> hosts
+      - name: Execute ansible playbook 
+        run: ansible-playbook playbook.yml -i hosts -v
+    
+    needs: [linter, molecule]

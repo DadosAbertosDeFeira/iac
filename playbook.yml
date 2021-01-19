@@ -10,9 +10,6 @@
     - dokku_bot.ansible_dokku
     - iac-role-basica
   vars:
-    # If you are running dokku on a small VPS, you'll most likely
-    # need some swap to ensure you don't run out of RAM during deploys
-    # swap_file_size_mb: '2048'
     dokku_version: 0.22.3
     sshcommand_version: 0.12.0
     dokku_hostname: mariaquiteria.gomex.me

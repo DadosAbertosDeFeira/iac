@@ -3,7 +3,7 @@ name: CI
 on: [push, pull_request]
 jobs:
   linter:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     strategy:
       matrix:
         python-version: [3.6, 3.7]
@@ -19,14 +19,14 @@ jobs:
           sudo apt install docker
           python3 -m pip install --upgrade pip
           python3 -m pip install -r requirements.txt
-          ansible-galaxy install -r requirements.yml --roles-path ./roles
+          ansible-galaxy install -r requirements.yml
       - name: Run linters
         run: |
           ansible-lint
           yamllint .
 
   molecule:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     strategy:
       matrix:
         python-version: [3.6, 3.7]
@@ -41,7 +41,7 @@ jobs:
         run: |
           python3 -m pip install --upgrade pip
           python3 -m pip install -r requirements.txt
-          ansible-galaxy install -r requirements.yml --roles-path ./roles
+          ansible-galaxy install -r requirements.yml
       - name: Test with molecule
         run:  molecule test
         env:
@@ -49,7 +49,7 @@ jobs:
           ANSIBLE_FORCE_COLOR: '1'
 
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     if: github.ref == 'refs/heads/main'
    
     steps:
@@ -62,7 +62,7 @@ jobs:
         run: |
           python3 -m pip install --upgrade pip
           python3 -m pip install -r requirements.txt
-          ansible-galaxy install -r requirements.yml --roles-path ./roles
+          ansible-galaxy install -r requirements.yml
       - name: Create ansible inventory
         run: |
           echo "[web]" >> hosts

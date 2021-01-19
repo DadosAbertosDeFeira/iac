@@ -4,6 +4,10 @@ Esse repositório por hora servirá de espaço para organização do time de inf
 
 Aqui teremos a lista de tarefas e qualquer documento necessário pra ajudar pessoas a começarem a ajudar.
 
+Sua contribuição é muito bem-vinda! Leia o nosso [manifesto](https://dadosabertosdefeira.medium.com/manifesto-a9cb9207820d)
+para entender os nossos valores e também o nosso [código de conduta](https://github.com/DadosAbertosDeFeira/guias/blob/main/CODIGO_DE_CONDUTA.md)
+e o [guia de contribuição](https://github.com/DadosAbertosDeFeira/guias/blob/main/GUIA_DE_CONTRIBUICAO.md).
+
 # Como testar
 
 ## Requisitos:

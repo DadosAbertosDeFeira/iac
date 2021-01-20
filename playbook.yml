@@ -23,6 +23,21 @@
       - name: letsencrypt
         url: https://github.com/dokku/dokku-letsencrypt.git
   tasks:
+    - name: Cria app do dramatiq
+      dokku_app:
+        app: &dramatiqname dramatiq
+    - name: Configura dramatiq
+      dokku_config:
+        app: *dramatiqname
+        config:
+          DATABASE_HOST: ""
+          TIKA_CLIENT_ONLY: "1"
+          TIKA_SERVER_ENDPOINT: ""
+          DOKKU_DOCKERFILE_START_CMD: dramatiq web.datasets.tasks -p3 -t2 -v
+    - name: Clona repositório do dramatiq
+      dokku_clone:
+        app: *dramatiqname
+        repository: https://github.com/DadosAbertosDeFeira/maria-quiteria.git main
     - name: create app
       dokku_app:
         # change this name in your template!

@@ -59,7 +59,7 @@
           - mariaquiteria.gomex.me
     - name: Configurar o crawl diário
       ansible.builtin.cron:
-        name: "Crawl diário"
+        name: "Crawl diario"
         minute: "0"
         hour: "6"
         job: "python manage.py crawl"

@@ -9,5 +9,4 @@
       when: ansible_os_family == 'Debian'
   roles:
     - dokku_bot.ansible_dokku
-    - geerlingguy.swap
     - iac-role-basica

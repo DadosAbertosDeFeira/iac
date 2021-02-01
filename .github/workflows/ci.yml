@@ -63,11 +63,14 @@ jobs:
           python3 -m pip install --upgrade pip
           python3 -m pip install -r requirements.txt
           ansible-galaxy install -r requirements.yml
+      - name: Create private key
+        run: |
+          echo ${{ secrets.PRIVATE_KEY }} >> private_key
       - name: Create ansible inventory
         run: |
           echo "[web]" >> hosts
           echo ${{ secrets.INVENTORY_HOSTS }} >> hosts
       - name: Execute ansible playbook 
-        run: ansible-playbook playbook.yml -i hosts -v
+        run: ansible-playbook --private-key private_key playbook.yml -i hosts -v
     
     needs: [linter, molecule]

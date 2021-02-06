@@ -9,6 +9,7 @@
   roles:
     - dokku_bot.ansible_dokku
     - iac-role-basica
+    - iac-role-services
   vars:
     dokku_version: 0.22.3
     sshcommand_version: 0.12.0
@@ -47,6 +48,11 @@
           NEW_RELIC_LOG: "stdout"
           SPIDERMON_TELEGRAM_FAKE: "True"
           SPIDERMON_SENTRY_FAKE: "True"
+    - name: Adicionar rede dokku service no container do app
+      dokku_docker_options:
+        app: *appname
+        phase: deploy
+        option: "--network dokku_services"
     - name: git clone
       # note you'll need to add a deployment key to the GH repo if it's private!
       dokku_clone:

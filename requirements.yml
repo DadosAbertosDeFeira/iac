@@ -6,3 +6,8 @@
 - src: https://github.com/DadosAbertosDeFeira/iac-role-basica.git
   scm: git
   version: "0.1"
+
+# Do repositório github que tem a role service
+- src: https://github.com/DadosAbertosDeFeira/iac-role-services.git
+  scm: git
+  version: "0.1"

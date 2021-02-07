@@ -53,6 +53,7 @@
         app: *appname
         phase: deploy
         option: "--network dokku_services"
+      changed_when: "'molecule-idempotence-notest' not in ansible_skip_tags"
     - name: git clone
       # note you'll need to add a deployment key to the GH repo if it's private!
       dokku_clone:

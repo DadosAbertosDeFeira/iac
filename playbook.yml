@@ -48,11 +48,10 @@
           NEW_RELIC_LOG: "stdout"
           SPIDERMON_TELEGRAM_FAKE: "True"
           SPIDERMON_SENTRY_FAKE: "True"
-    - name: Adicionar rede dokku service no container do app
-      dokku_docker_options:
-        app: *appname
-        phase: deploy
-        option: "--network dokku_services"
+    - name: Add dokku_service network to mariaquiteria
+      command: dokku network:set mariaquiteria.gomex.me attach-post-create dokku_services
+      args:
+        creates: /tmp/network_dokku_services_mariaquiteria
       changed_when: "'molecule-idempotence-notest' not in ansible_skip_tags"
     - name: git clone
       # note you'll need to add a deployment key to the GH repo if it's private!

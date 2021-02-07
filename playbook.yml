@@ -48,7 +48,7 @@
           NEW_RELIC_LOG: "stdout"
           SPIDERMON_TELEGRAM_FAKE: "True"
           SPIDERMON_SENTRY_FAKE: "True"
-    - name: Add dokku_service network to mariaquiteria 
+    - name: Add dokku_service network to mariaquiteria
       command: dokku network:set mariaquiteria.gomex.me attach-post-create dokku_services
       args:
         creates: /tmp/network_dokku_services_mariaquiteria

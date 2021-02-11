@@ -1,0 +1,14 @@
+- hosts: all
+  tasks:
+    - name: Atualiza o cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+        name: jq
+      when: ansible_os_family == 'Debian'
+    - name: Configuração do docker
+      shell: |
+        [ -d /etc/docker ] || mkdir -p /etc/docker
+        [ -f /etc/docker/daemon.json ] || (echo '{}' > /etc/docker/daemon.json)
+        cp /etc/docker/daemon.json /etc/docker/daemon.json.bkp
+        jq -M '."storage-driver"="vfs"' /etc/docker/daemon.json.bkp > /etc/docker/daemon.json

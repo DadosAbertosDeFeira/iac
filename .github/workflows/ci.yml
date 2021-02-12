@@ -42,11 +42,6 @@ jobs:
           python3 -m pip install --upgrade pip
           python3 -m pip install -r requirements.txt
           ansible-galaxy install -r requirements.yml
-      - name: Force GitHub Actions' docker daemon to use vfs.
-        run: |
-          sudo systemctl stop docker
-          echo '{"cgroup-parent":"/actions_job","storage-driver":"aufs"}' | sudo tee /etc/docker/daemon.json
-          sudo systemctl start docker
       - name: Test with molecule
         run:  molecule test
         env:

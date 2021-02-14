@@ -36,13 +36,13 @@
           DOKKU_LETSENCRYPT_EMAIL: linux.rafa@gmail.com
           # specify port so `domains` can setup the port mapping properly
           PORT: "5000"
-          #DATABASE_URL: ""
-          #CLOUDAMQP_URL: ""
-          #CLOUDAMQP_APIKEY: ""
+          # DATABASE_URL: ""
+          # CLOUDAMQP_URL: ""
+          # CLOUDAMQP_APIKEY: ""
           CITY_COUNCIL_WEBSERVICE: "https://www.transparencia.feiradesantana.ba.leg.br/"
           DJANGO_ALLOWED_HOSTS: "0.0.0.0,mariaquiteria.gomex.me,.gomex.me"
           DJANGO_CONFIGURATION: "Prod"
-          #DJANGO_SECRET_KEY: ""
+          # DJANGO_SECRET_KEY: ""
           DJANGO_SETTINGS_MODULE: "web.settings"
           ENABLE_AUTOTHROTTLE_DEBUG: "True"
           NEW_RELIC_LOG: "stdout"
@@ -68,4 +68,4 @@
         name: "Crawl diario"
         minute: "0"
         hour: "6"
-        job: "python manage.py crawl"
+        job: "dokku run mariaquiteria.gomex.me  python manage.py crawl"

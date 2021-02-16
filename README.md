@@ -47,7 +47,14 @@ Instale o Python 3
 ```
 python3 -m venv .venv
 source .venv/bin/activate
-pip install ansible
+pip install -r requirements.txt
+```
+Pra testar, execute os seguintes comandos:
+
+```
+molecule create
+molecule converge
+molecule verify
 ```
 
 Primeiro é necessário instalar as roles necessárias com o comando:

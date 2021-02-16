@@ -4,6 +4,7 @@ ignore: |
   .github/
   meta/
   roles/
+  .venv/
 
 rules:
   braces:

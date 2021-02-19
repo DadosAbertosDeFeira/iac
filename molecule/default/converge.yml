@@ -1,13 +1,3 @@
 ---
 - name: Converge
-  hosts: all
-  pre_tasks:
-    - name: Atualizando apt cache
-      apt:
-        update_cache: yes
-        cache_valid_time: 3600
-      when: ansible_os_family == 'Debian'
-  roles:
-    - dokku_bot.ansible_dokku
-    - geerlingguy.swap
-    - iac-role-basica
+  import_playbook: ../../playbook.yml

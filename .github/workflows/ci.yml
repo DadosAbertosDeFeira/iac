@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-18.04
     strategy:
       matrix:
-        python-version: [3.6, 3.7]
+        python-version: [3.9]
     
     steps:
       - uses: actions/checkout@v2
@@ -29,7 +29,7 @@ jobs:
     runs-on: ubuntu-18.04
     strategy:
       matrix:
-        python-version: [3.6, 3.7]
+        python-version: [3.9]
     
     steps:
       - uses: actions/checkout@v2
@@ -63,11 +63,20 @@ jobs:
           python3 -m pip install --upgrade pip
           python3 -m pip install -r requirements.txt
           ansible-galaxy install -r requirements.yml
+      - name: Setup SSH private Key
+        env:
+            SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+        run: |
+            mkdir -p ~/.ssh
+            ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+            ssh-add - <<< "${{ secrets.PRIVATE_KEY }}"
       - name: Create ansible inventory
         run: |
           echo "[web]" >> hosts
           echo ${{ secrets.INVENTORY_HOSTS }} >> hosts
       - name: Execute ansible playbook 
-        run: ansible-playbook playbook.yml -i hosts -v
+        run: ansible-playbook --private-key private_key playbook.yml -i hosts -v
+        env:
+            SSH_AUTH_SOCK: /tmp/ssh_agent.sock
     
     needs: [linter, molecule]

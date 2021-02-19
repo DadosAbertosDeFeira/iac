@@ -1,15 +1,15 @@
 ---
 - hosts: all
-  become: true
   pre_tasks:
     - name: Atualizando apt cache
       apt:
         update_cache: yes
-        cache_valid_time: 3600
+        cache_valid_time: 600
       when: ansible_os_family == 'Debian'
   roles:
     - dokku_bot.ansible_dokku
     - iac-role-basica
+    - iac-role-services
   vars:
     dokku_version: 0.22.3
     sshcommand_version: 0.12.0
@@ -51,6 +51,11 @@
           NEW_RELIC_LOG: "stdout"
           SPIDERMON_TELEGRAM_FAKE: "True"
           SPIDERMON_SENTRY_FAKE: "True"
+    - name: Add dokku_service network to mariaquiteria
+      command: dokku network:set mariaquiteria.gomex.me attach-post-create dokku_services
+      args:
+        creates: /tmp/network_dokku_services_mariaquiteria
+      changed_when: "'molecule-idempotence-notest' not in ansible_skip_tags"
     - name: git clone
       # note you'll need to add a deployment key to the GH repo if it's private!
       dokku_clone:
@@ -61,3 +66,9 @@
         app: *appname
         domains:
           - mariaquiteria.gomex.me
+    - name: Configurar o crawl diário
+      ansible.builtin.cron:
+        name: "Crawl diario"
+        minute: "0"
+        hour: "6"
+        job: "dokku run mariaquiteria.gomex.me  python manage.py crawl"

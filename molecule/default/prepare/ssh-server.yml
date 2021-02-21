@@ -1,0 +1,8 @@
+- name: Instala server SSH
+  ansible.builtin.apt:
+    name: openssh-server
+    install_recommends: no
+- name: Inicia server SSH
+  ansible.builtin.service:
+    name: sshd
+    state: started

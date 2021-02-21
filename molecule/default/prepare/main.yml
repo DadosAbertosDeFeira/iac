@@ -1,0 +1,11 @@
+---
+- hosts: all
+  tasks:
+    - name: Atualiza o cache
+      ansible.builtin.apt:
+        update_cache: yes
+        cache_valid_time: 3600
+        name: jq
+      when: ansible_os_family == 'Debian'
+    - ansible.builtin.import_tasks: docker.yml
+    - ansible.builtin.import_tasks: ssh-server.yml

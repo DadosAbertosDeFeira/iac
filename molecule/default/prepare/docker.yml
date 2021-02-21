@@ -1,0 +1,26 @@
+- name: Cria pasta de configuração do docker
+  ansible.builtin.file:
+    dest: /etc/docker
+    owner: root
+    group: root
+    mode: u=rw,g=r,o=r
+    state: directory
+    recurse: true
+- name: Cria arquivo de configuração do docker
+  ansible.builtin.copy:
+    dest: /etc/docker/daemon.json
+    owner: root
+    group: root
+    mode: u=rw,g=r,o=r
+    content: '{}'
+    force: False
+- name: Configuração do docker
+  ansible.builtin.shell: |
+    if [ -z $(jq -r '."storage-driver" // ""' /etc/docker/daemon.json) ];
+    then
+        cp /etc/docker/daemon.json /etc/docker/daemon.json.bkp
+        jq -M '."storage-driver"="vfs"' /etc/docker/daemon.json.bkp > /etc/docker/daemon.json
+        echo modificado
+    fi
+  register: resultado
+  changed_when: 'resultado.stdout == "modificado"'

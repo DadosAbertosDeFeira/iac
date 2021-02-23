@@ -22,7 +22,7 @@ jobs:
           ansible-galaxy install -r requirements.yml
       - name: Create secrets file
         run: |
-          echo ${{ secrets.VAULT_SECRET }} >> /tmp/vault/vault_password_file
+          echo ${{ secrets.VAULT_SECRET }} >> /tmp/vault_password_file
       - name: Run linters
         run: |
           ansible-lint
@@ -47,7 +47,7 @@ jobs:
           ansible-galaxy install -r requirements.yml
       - name: Create secrets file
         run: |
-          echo ${{ secrets.VAULT_SECRET }} >> /tmp/vault/vault_password_file
+          echo ${{ secrets.VAULT_SECRET }} >> /tmp/vault_password_file
       - name: Test with molecule
         run: molecule test
         env:

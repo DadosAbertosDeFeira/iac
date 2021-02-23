@@ -20,6 +20,9 @@ jobs:
           python3 -m pip install --upgrade pip
           python3 -m pip install -r requirements.txt
           ansible-galaxy install -r requirements.yml
+      - name: Create secrets file
+        run: |
+          echo ${{ secrets.VAULT_SECRET }} >> /tmp/vault_password_file    
       - name: Run linters
         run: |
           ansible-lint
@@ -42,6 +45,9 @@ jobs:
           python3 -m pip install --upgrade pip
           python3 -m pip install -r requirements.txt
           ansible-galaxy install -r requirements.yml
+      - name: Create secrets file
+        run: |
+          echo ${{ secrets.VAULT_SECRET }} >> /tmp/vault_password_file
       - name: Test with molecule
         run:  molecule test
         env:
@@ -63,6 +69,9 @@ jobs:
           python3 -m pip install --upgrade pip
           python3 -m pip install -r requirements.txt
           ansible-galaxy install -r requirements.yml
+      - name: Create secrets file
+        run: |
+          echo ${{ secrets.VAULT_SECRET }} >> /tmp/vault_password_file
       - name: Setup SSH private Key
         env:
             SSH_AUTH_SOCK: /tmp/ssh_agent.sock
@@ -78,5 +87,5 @@ jobs:
         run: ansible-playbook --private-key private_key playbook.yml -i hosts -v
         env:
             SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-    
+            
     needs: [linter, molecule]

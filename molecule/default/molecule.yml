@@ -25,7 +25,7 @@ provisioner:
     converge: converge.yml
   config_options:
     defaults:
-      vault_password_file: /tmp/vault/vault_password_file
+      vault_password_file: /tmp/vault_password_file
 verifier:
   name: testinfra
   env:

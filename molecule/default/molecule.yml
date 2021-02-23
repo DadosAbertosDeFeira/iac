@@ -15,7 +15,6 @@ platforms:
       - 80:80/tcp
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
-      - /tmp:/tmp/vault:ro
     privileged: true
     pre_build_image: true
 provisioner:

@@ -45,9 +45,6 @@ jobs:
           python3 -m pip install --upgrade pip
           python3 -m pip install -r requirements.txt
           ansible-galaxy install -r requirements.yml
-      - name: Create secrets file
-        run: |
-          echo ${{ secrets.VAULT_SECRET }} >> /tmp/vault_password_file
       - name: Test with molecule
         run:  molecule test
         env:

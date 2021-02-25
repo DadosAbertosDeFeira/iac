@@ -22,9 +22,7 @@ provisioner:
   playbooks:
     prepare: prepare.yml
     converge: converge.yml
-  options:
-    vault_password_file: /tmp/vault_password_file
-
+  
 verifier:
   name: testinfra
   env:

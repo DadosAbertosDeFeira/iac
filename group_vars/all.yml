@@ -1,0 +1,6 @@
+---
+#dev vars
+DATABASE_URL: ""
+CLOUDAMQP_URL: ""
+CLOUDAMQP_APIKEY: ""
+DJANGO_SECRET_KEY: ""

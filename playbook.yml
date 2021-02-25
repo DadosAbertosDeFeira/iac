@@ -28,9 +28,9 @@
       dokku_app:
         # change this name in your template!
         app: &appname mariaquiteria.gomex.me
-    - name: loading dokku secrets
-      include_vars:
-        file: vars/dokku_secrets.yml
+    # - name: loading dokku secrets
+    #   include_vars:
+    #     file: vars/dokku_secrets.yml
     - name: environment configuration
       dokku_config:
         app: *appname

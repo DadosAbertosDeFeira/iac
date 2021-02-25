@@ -22,7 +22,6 @@ provisioner:
   playbooks:
     prepare: prepare.yml
     converge: converge.yml
-  
 verifier:
   name: testinfra
   env:

@@ -42,6 +42,10 @@ jobs:
           python3 -m pip install --upgrade pip
           python3 -m pip install -r requirements.txt
           ansible-galaxy install -r requirements.yml
+      - name: Create vault file and encrypt
+        run: |
+          echo "MY_AWESOME_PASSWORD" > /tmp/vault_password_file
+          ansible-vault encrypt group_vars/ungrouped.yaml --vault-password-file /tmp/vault_password_file
       - name: Test with molecule
         run:  molecule test
         env:
@@ -65,7 +69,7 @@ jobs:
           ansible-galaxy install -r requirements.yml
       - name: Create secrets file
         run: |
-          echo ${{ secrets.VAULT_SECRET }} >> /tmp/vault_password_file
+          echo ${{ secrets.VAULT_SECRET }} > /tmp/vault_password_file
       - name: Setup SSH private Key
         env:
             SSH_AUTH_SOCK: /tmp/ssh_agent.sock

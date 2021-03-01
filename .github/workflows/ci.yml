@@ -42,10 +42,13 @@ jobs:
           python3 -m pip install --upgrade pip
           python3 -m pip install -r requirements.txt
           ansible-galaxy install -r requirements.yml
-      - name: Create vault file and encrypt
+      - name: Create vault password file
         run: |
           echo "MY_AWESOME_PASSWORD" > /tmp/vault_password_file
-          ansible-vault encrypt group_vars/ungrouped.yaml --vault-password-file /tmp/vault_password_file
+      - name: Encrypt the variable file
+        run: |
+          cd group_vars
+          ansible-vault encrypt ungrouped.yaml --vault-password-file /tmp/vault_password_file
       - name: Test with molecule
         run:  molecule test
         env:

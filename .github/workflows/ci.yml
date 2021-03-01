@@ -47,7 +47,10 @@ jobs:
           echo "MY_AWESOME_PASSWORD" > /tmp/vault_password_file
       - name: Encrypt the variable file
         run: |
-          ansible-vault encrypt ./group_vars/ungrouped.yaml --vault-password-file /tmp/vault_password_file
+          pwd
+          ls
+          cd $GITHUB_WORKSPACE/group_vars/
+          ansible-vault encrypt ungrouped.yaml --vault-password-file /tmp/vault_password_file
       - name: Test with molecule
         run:  molecule test
         env:

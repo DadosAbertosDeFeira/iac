@@ -48,7 +48,7 @@ jobs:
       - name: Encrypt the variable file
         run: |
           cd $GITHUB_WORKSPACE/group_vars/
-          ansible-vault encrypt ungrouped.yml --vault-password-file /tmp/vault_password_file
+          ansible-vault encrypt molecule.yml --vault-password-file /tmp/vault_password_file
       - name: Test with molecule
         run: molecule test
         env:

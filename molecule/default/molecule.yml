@@ -9,14 +9,9 @@ driver:
   name: docker
 platforms:
   - name: ubuntu-18.04
-    image: "geerlingguy/docker-${MOLECULE_DISTRO:-ubuntu1804}-ansible:latest"
-    command: ${MOLECULE_DOCKER_COMMAND:-""}
+    image: "ubuntu1804"
     published_ports:
       - 80:80/tcp
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    privileged: true
-    pre_build_image: true
 provisioner:
   name: ansible
   playbooks:

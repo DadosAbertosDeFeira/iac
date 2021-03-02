@@ -4,5 +4,5 @@
     install_recommends: no
 - name: Inicia server SSH
   ansible.builtin.service:
-    name: sshd
+    name: ssh
     state: started

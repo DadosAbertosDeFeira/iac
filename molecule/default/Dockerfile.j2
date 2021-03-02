@@ -1,0 +1,7 @@
+FROM geerlingguy/docker-${MOLECULE_DISTRO:-ubuntu1804}-ansible:latest
+
+ADD https://raw.githubusercontent.com/gdraheim/docker-systemctl-replacement/v1.5.4505/files/docker/systemctl3.py /bin/systemctl
+
+ADD https://raw.githubusercontent.com/gdraheim/docker-systemctl-replacement/v1.5.4505/files/docker/journalctl3.py /bin/journalctl
+
+RUN chmod a+x /bin/systemctl /bin/journalctl && cp /bin/systemctl /lib/systemd/systemd

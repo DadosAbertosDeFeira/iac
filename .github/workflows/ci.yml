@@ -7,7 +7,7 @@ jobs:
     strategy:
       matrix:
         python-version: [3.9]
-    
+
     steps:
       - uses: actions/checkout@v2
       - name: Set up python ${{ matrix.python-version }}
@@ -24,13 +24,34 @@ jobs:
         run: |
           ansible-lint
           yamllint .
+      - name: Linter Success
+        uses: rjstone/discord-webhook-notify@v1
+        if: success()
+        with:
+          severity: info
+          details: Linter Success
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Linter Failure
+        uses: rjstone/discord-webhook-notify@v1
+        if: failure()
+        with:
+          severity: error
+          details: Linter Failed!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Linter Cancelled
+        uses: rjstone/discord-webhook-notify@v1
+        if: cancelled()
+        with:
+          severity: warn
+          details: Linter Cancelled!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   molecule:
     runs-on: ubuntu-18.04
     strategy:
       matrix:
         python-version: [3.9]
-    
+
     steps:
       - uses: actions/checkout@v2
       - name: Set up python ${{ matrix.python-version }}
@@ -43,21 +64,42 @@ jobs:
           python3 -m pip install -r requirements.txt
           ansible-galaxy install -r requirements.yml
       - name: Test with molecule
-        run:  molecule test
+        run: molecule test
         env:
-          PY_COLORS: '1'
-          ANSIBLE_FORCE_COLOR: '1'
+          PY_COLORS: "1"
+          ANSIBLE_FORCE_COLOR: "1"
+      - name: Test Molucule Succeed
+        uses: rjstone/discord-webhook-notify@v1
+        if: success()
+        with:
+          severity: info
+          details: Test Molucule  Success
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Test Molucule Failure
+        uses: rjstone/discord-webhook-notify@v1
+        if: failure()
+        with:
+          severity: error
+          details: Test Molucule Failed!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Test Molucule Cancelled
+        uses: rjstone/discord-webhook-notify@v1
+        if: cancelled()
+        with:
+          severity: warn
+          details: Test Molucule Cancelled!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   deploy:
     runs-on: ubuntu-18.04
     if: github.ref == 'refs/heads/main'
-   
+
     steps:
       - uses: actions/checkout@v2
       - name: Set up python 3
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x'
+          python-version: "3.x"
       - name: Install dependencies
         run: |
           python3 -m pip install --upgrade pip
@@ -65,18 +107,17 @@ jobs:
           ansible-galaxy install -r requirements.yml
       - name: Setup SSH private Key
         env:
-            SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
         run: |
-            mkdir -p ~/.ssh
-            ssh-agent -a $SSH_AUTH_SOCK > /dev/null
-            ssh-add - <<< "${{ secrets.PRIVATE_KEY }}"
+          mkdir -p ~/.ssh
+          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+          ssh-add - <<< "${{ secrets.PRIVATE_KEY }}"
       - name: Create ansible inventory
         run: |
           echo "[web]" >> hosts
           echo ${{ secrets.INVENTORY_HOSTS }} >> hosts
-      - name: Execute ansible playbook 
+      - name: Execute ansible playbook
         run: ansible-playbook --private-key private_key playbook.yml -i hosts -v
         env:
-            SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-    
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
     needs: [linter, molecule]

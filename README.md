@@ -61,3 +61,4 @@ Depois, crie um inventário para a máquina de teste. No repositório há um inv
 ```
 ansible-playbook -i hosts playbook.yml
 ```
+

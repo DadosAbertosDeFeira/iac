@@ -78,12 +78,6 @@
       args:
         creates: /tmp/network_dokku_services_mariaquiteria
       changed_when: "'molecule-idempotence-notest' not in ansible_skip_tags"
-    - name: Configurar o crawl staging diário
-      ansible.builtin.cron:
-        name: "Crawl diario"
-        minute: "0"
-        hour: "6"
-        job: "dokku run staging.dadosabertosdefeira.com.br  python manage.py crawl"
     - name: Configurar o crawl production diário
       ansible.builtin.cron:
         name: "Crawl diario"

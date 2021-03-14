@@ -13,7 +13,7 @@
   vars:
     dokku_version: 0.22.3
     sshcommand_version: 0.12.0
-    dokku_hostname: mariaquiteria.gomex.me
+    dokku_hostname: dadosabertosdefeira.com.br
     dokku_users:
       - name: gomex
         username: gomex
@@ -27,7 +27,7 @@
     - name: create app
       dokku_app:
         # change this name in your template!
-        app: &appname mariaquiteria.gomex.me
+        app: &appname staging.dadosabertosdefeira.com.br
     - name: environment configuration
       dokku_config:
         app: *appname
@@ -40,7 +40,7 @@
           # CLOUDAMQP_URL: ""
           # CLOUDAMQP_APIKEY: ""
           CITY_COUNCIL_WEBSERVICE: "https://www.transparencia.feiradesantana.ba.leg.br/"
-          DJANGO_ALLOWED_HOSTS: "0.0.0.0,mariaquiteria.gomex.me,.gomex.me"
+          DJANGO_ALLOWED_HOSTS: "0.0.0.0,staging.dadosabertosdefeira.com.br,.gomex.me"
           DJANGO_CONFIGURATION: "Prod"
           # DJANGO_SECRET_KEY: ""
           DJANGO_SETTINGS_MODULE: "web.settings"
@@ -49,7 +49,7 @@
           SPIDERMON_TELEGRAM_FAKE: "True"
           SPIDERMON_SENTRY_FAKE: "True"
     - name: Add dokku_service network to mariaquiteria
-      command: dokku network:set mariaquiteria.gomex.me attach-post-create dokku_services
+      command: dokku network:set staging.dadosabertosdefeira.com.br attach-post-create dokku_services
       args:
         creates: /tmp/network_dokku_services_mariaquiteria
       changed_when: "'molecule-idempotence-notest' not in ansible_skip_tags"
@@ -62,10 +62,10 @@
       dokku_domains:
         app: *appname
         domains:
-          - mariaquiteria.gomex.me
+          - staging.dadosabertosdefeira.com.br
     - name: Configurar o crawl diário
       ansible.builtin.cron:
         name: "Crawl diario"
         minute: "0"
         hour: "6"
-        job: "dokku run mariaquiteria.gomex.me  python manage.py crawl"
+        job: "dokku run staging.dadosabertosdefeira.com.br  python manage.py crawl"

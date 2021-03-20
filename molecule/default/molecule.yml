@@ -13,6 +13,7 @@ platforms:
     command: ${MOLECULE_DOCKER_COMMAND:-""}
     published_ports:
       - 80:80/tcp
+      - 2222:22/tcp
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     privileged: true

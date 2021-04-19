@@ -1,0 +1,14 @@
+---
+# file: group_vars/all/vars.yml
+dokku_version: 0.22.3
+sshcommand_version: 0.12.0
+dokku_hostname: dadosabertosdefeira.com.br
+dokku_users:
+  - name: gomex
+    username: gomex
+    ssh_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDYc9rlj0wKka5t31T4EiTanSmXpswDg00dYmuwdvEW3bAovcdzt6p3kgFxpPaZj7X6oFfvSCXpoL+/yjngujEW9CGbqfdVyvCodIuIaGuoUsxo7dtMCLzqZtGGe1m6xoTyNqZQzv68nF1fZ/ku7YNK9HGKKcjNJVvs6ocqK5Jbdb6IGRF64kP4hx8IX5n8CU8APn5esrh6BNhViKHWYIGDYoFkd54Z4CeD156BYl1OhWbla6u1vOntpj1uw3Lp+haAWbXSJMCpztsYPeynrQ14GUbHPRAsO4IILD5CtZWsp16VnEIAhsIqrnzp1BGTduwbX5VVzY3K7JdFNEWThFhd"
+dokku_plugins:
+  - name: clone
+    url: https://github.com/crisward/dokku-clone.git
+  - name: letsencrypt
+    url: https://github.com/dokku/dokku-letsencrypt.git

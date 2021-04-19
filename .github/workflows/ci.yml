@@ -55,7 +55,7 @@ jobs:
           PY_COLORS: "1"
           ANSIBLE_FORCE_COLOR: "1"
 
-  deploy:
+  staging-deploy:
     runs-on: ubuntu-18.04
     if: github.ref == 'refs/heads/main'
 
@@ -82,10 +82,10 @@ jobs:
           ssh-add - <<< "${{ secrets.PRIVATE_KEY }}"
       - name: Create ansible inventory
         run: |
-          echo "[web]" >> hosts
+          echo "[staging]" >> hosts
           echo ${{ secrets.INVENTORY_HOSTS }} >> hosts
       - name: Execute ansible playbook
-        run: ansible-playbook --private-key private_key playbook.yml -i hosts -v
+        run: ansible-playbook --private-key private_key playbook.yml -i hosts -l staging -v
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
 

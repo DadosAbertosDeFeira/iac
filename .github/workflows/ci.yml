@@ -90,3 +90,39 @@ jobs:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
 
     needs: [linter, molecule]
+
+  production-deploy:
+    runs-on: ubuntu-18.04
+    if: startsWith(github.ref, 'refs/tags/v')
+    
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up python 3
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+      - name: Install dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install -r requirements.txt
+          ansible-galaxy install -r requirements.yml
+      - name: Create secrets file
+        run: |
+          echo ${{ secrets.VAULT_SECRET }} > /tmp/vault_password_file
+      - name: Setup SSH private Key
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+        run: |
+          mkdir -p ~/.ssh
+          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+          ssh-add - <<< "${{ secrets.PRIVATE_KEY }}"
+      - name: Create ansible inventory
+        run: |
+          echo "[staging]" >> hosts
+          echo ${{ secrets.INVENTORY_HOSTS }} >> hosts
+      - name: Execute ansible playbook
+        run: ansible-playbook --private-key private_key playbook.yml -i hosts -l production -v
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+
+    needs: [linter, molecule, staging-deploy]

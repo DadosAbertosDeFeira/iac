@@ -121,7 +121,7 @@ jobs:
           ssh-add - <<< "${{ secrets.PRIVATE_KEY }}"
       - name: Create ansible inventory
         run: |
-          echo "[staging]" >> hosts
+          echo "[production]" >> hosts
           echo ${{ secrets.INVENTORY_HOSTS }} >> hosts
       - name: Execute ansible playbook
         run: ansible-playbook --private-key private_key playbook.yml -i hosts -l production -v

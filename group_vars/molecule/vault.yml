@@ -1,0 +1,5 @@
+---
+vault_database_url: ""
+vault_cloudamqp_url: ""
+vault_cloudamqp_apikey: ""
+vault_django_secret_key: ""

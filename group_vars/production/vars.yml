@@ -1,0 +1,19 @@
+---
+# file: group_vars/production/vars.yml
+env: "production"
+task_name: "production environment configuration"
+app: "dadosabertosdefeira.com.br"
+# specify a email for dokku-letsencrypt
+dokku_letsencrypt_email: "linux.rafa@gmail.com"
+# specify port so `domains` can setup the port mapping properly
+port: "5000"
+database_url: "{{ vault_database_url }}"
+cloudamqp_url: "{{ vault_cloudamqp_url }}"
+cloudamqp_apikey: "{{ vault_cloudamqp_apikey }}"
+city_council_webservice: "https://www.transparencia.feiradesantana.ba.leg.br/"
+django_allowed_hosts: "0.0.0.0,dadosabertosdefeira.com.br,.gomex.me"
+django_configuration: "Prod"
+django_secret_key: "{{ vault_django_secret_key }}"
+django_settings_module: "web.settings"
+enable_autothrottle_debug: "true"
+new_relic_log: "stdout"

@@ -1,2 +1,5 @@
-[web]
-web1              ansible_host=nome_do_host_aqui ansible_port=porta_aqui
+[staging]
+web_staging              ansible_host=nome_do_host_aqui ansible_port=porta_aqui
+
+[production]
+web_production           ansible_host=nome_do_host_aqui ansible_port=porta_aqui

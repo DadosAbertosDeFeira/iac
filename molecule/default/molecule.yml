@@ -18,11 +18,16 @@ platforms:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     privileged: true
     pre_build_image: true
+    groups:
+      - molecule
 provisioner:
   name: ansible
   playbooks:
     prepare: prepare.yml
     converge: converge.yml
+  config_options:
+    defaults:
+      vault_password_file: /tmp/vault_password_file
 verifier:
   name: testinfra
   env:

@@ -10,77 +10,35 @@
     - dokku_bot.ansible_dokku
     - iac-role-basica
     - iac-role-services
-  vars:
-    dokku_version: 0.22.3
-    sshcommand_version: 0.12.0
-    dokku_hostname: dadosabertosdefeira.com.br
-    dokku_users:
-      - name: gomex
-        username: gomex
-        ssh_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDYc9rlj0wKka5t31T4EiTanSmXpswDg00dYmuwdvEW3bAovcdzt6p3kgFxpPaZj7X6oFfvSCXpoL+/yjngujEW9CGbqfdVyvCodIuIaGuoUsxo7dtMCLzqZtGGe1m6xoTyNqZQzv68nF1fZ/ku7YNK9HGKKcjNJVvs6ocqK5Jbdb6IGRF64kP4hx8IX5n8CU8APn5esrh6BNhViKHWYIGDYoFkd54Z4CeD156BYl1OhWbla6u1vOntpj1uw3Lp+haAWbXSJMCpztsYPeynrQ14GUbHPRAsO4IILD5CtZWsp16VnEIAhsIqrnzp1BGTduwbX5VVzY3K7JdFNEWThFhd"
-    dokku_plugins:
-      - name: clone
-        url: https://github.com/crisward/dokku-clone.git
-      - name: letsencrypt
-        url: https://github.com/dokku/dokku-letsencrypt.git
   tasks:
-    - name: create staging app
+    - name: create app
       dokku_app:
         # change this name in your template!
-        app: &appnamestaging staging.dadosabertosdefeira.com.br
-    - name: create production app
-      dokku_app:
-        # change this name in your template!
-        app: &appname dadosabertosdefeira.com.br
-    - name: staging environment configuration
+        app: "{{ app }}"
+    - name: environment configuration
       dokku_config:
-        app: *appnamestaging
+        app: "{{ app }}"
         config:
-          # specify a email for dokku-letsencrypt
-          DOKKU_LETSENCRYPT_EMAIL: linux.rafa@gmail.com
-          # specify port so `domains` can setup the port mapping properly
-          PORT: "5000"
-          # DATABASE_URL: ""
-          # CLOUDAMQP_URL: ""
-          # CLOUDAMQP_APIKEY: ""
-          CITY_COUNCIL_WEBSERVICE: "https://www.transparencia.feiradesantana.ba.leg.br/"
-          DJANGO_ALLOWED_HOSTS: "0.0.0.0,staging.dadosabertosdefeira.com.br,.gomex.me"
-          DJANGO_CONFIGURATION: "Prod"
-          # DJANGO_SECRET_KEY: ""
-          DJANGO_SETTINGS_MODULE: "web.settings"
-          ENABLE_AUTOTHROTTLE_DEBUG: "True"
-          NEW_RELIC_LOG: "stdout"
-    - name: production environment configuration
-      dokku_config:
-        app: *appname
-        config:
-          # specify a email for dokku-letsencrypt
-          DOKKU_LETSENCRYPT_EMAIL: linux.rafa@gmail.com
-          # specify port so `domains` can setup the port mapping properly
-          PORT: "5000"
-          # DATABASE_URL: ""
-          # CLOUDAMQP_URL: ""
-          # CLOUDAMQP_APIKEY: ""
-          CITY_COUNCIL_WEBSERVICE: "https://www.transparencia.feiradesantana.ba.leg.br/"
-          DJANGO_ALLOWED_HOSTS: "0.0.0.0,dadosabertosdefeira.com.br,.gomex.me"
-          DJANGO_CONFIGURATION: "Prod"
-          # DJANGO_SECRET_KEY: ""
-          DJANGO_SETTINGS_MODULE: "web.settings"
-          ENABLE_AUTOTHROTTLE_DEBUG: "True"
-          NEW_RELIC_LOG: "stdout"
-    - name: Add dokku_service network to mariaquiteria staging
-      command: dokku network:set staging.dadosabertosdefeira.com.br attach-post-create dokku_services
+          DOKKU_LETSENCRYPT_EMAIL: "{{ dokku_letsencrypt_email }}"
+          PORT: "{{ port }}"
+          # DATABASE_URL: "{{ database_url }}"
+          # CLOUDAMQP_URL: "{{ cloudamqp_url }}"
+          # CLOUDAMQP_APIKEY: "{{ cloudamqp_apikey }}"
+          CITY_COUNCIL_WEBSERVICE: "{{ city_council_webservice }}"
+          DJANGO_ALLOWED_HOSTS: "{{ django_allowed_hosts }}"
+          DJANGO_CONFIGURATION: "{{ django_configuration }}"
+          # DJANGO_SECRET_KEY: "{{ django_secret_key }}"
+          DJANGO_SETTINGS_MODULE: "{{ django_settings_module }}"
+          ENABLE_AUTOTHROTTLE_DEBUG: "{{ enable_autothrottle_debug }}"
+          NEW_RELIC_LOG: "{{ new_relic_log }}"
+    - name: Add dokku_service network to mariaquiteria
+      command: "dokku network:set {{ app }} attach-post-create dokku_services"
       args:
-        creates: /tmp/network_dokku_services_mariaquiteria
-      changed_when: "'molecule-idempotence-notest' not in ansible_skip_tags"
-    - name: Add dokku_service network to mariaquiteria production
-      command: dokku network:set dadosabertosdefeira.com.br attach-post-create dokku_services
-      args:
-        creates: /tmp/network_dokku_services_mariaquiteria
+        creates: "/tmp/network_dokku_services_mariaquiteria_{{ env }}"
       changed_when: "'molecule-idempotence-notest' not in ansible_skip_tags"
     - name: Configurar o crawl production diário
       ansible.builtin.cron:
         name: "Crawl diario"
         minute: "0"
         hour: "6"
-        job: "dokku run dadosabertosdefeira.com.br  python manage.py crawl"
+        job: "dokku run dadosabertosdefeira.com.br python manage.py crawl"

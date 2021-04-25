@@ -27,7 +27,7 @@
           CITY_COUNCIL_WEBSERVICE: "{{ city_council_webservice }}"
           DJANGO_ALLOWED_HOSTS: "{{ django_allowed_hosts }}"
           DJANGO_CONFIGURATION: "{{ django_configuration }}"
-          # DJANGO_SECRET_KEY: "{{ django_secret_key }}"
+          DJANGO_SECRET_KEY: "{{ django_secret_key }}"
           DJANGO_SETTINGS_MODULE: "{{ django_settings_module }}"
           ENABLE_AUTOTHROTTLE_DEBUG: "{{ enable_autothrottle_debug }}"
           NEW_RELIC_LOG: "{{ new_relic_log }}"

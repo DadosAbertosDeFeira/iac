@@ -12,3 +12,7 @@
 - src: https://github.com/DadosAbertosDeFeira/iac-role-services.git
   scm: git
   version: "0.1"
+
+# Do galaxy
+- src: newrelic.newrelic-infra
+  version: "0.8.2"

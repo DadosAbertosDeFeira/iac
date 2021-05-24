@@ -5,8 +5,12 @@
       ansible.builtin.apt:
         update_cache: yes
         cache_valid_time: 3600
-        name: jq
+        name: "{{ item }}"
+      loop:
+        - jq
+        - gpg-agent
       when: ansible_os_family == 'Debian'
+
     - name: Cria pasta de configuração do docker
       ansible.builtin.file:
         dest: /etc/docker
@@ -21,7 +25,7 @@
         owner: root
         group: root
         mode: u=rw,g=r,o=r
-        content: '{}'
+        content: "{}"
         force: False
     - name: Configuração do docker
       ansible.builtin.shell: |

@@ -86,7 +86,7 @@ jobs:
       - name: Create ansible inventory
         run: |
           echo "[staging]" >> hosts
-          echo ${{ secrets.INVENTORY_HOSTS }} >> hosts
+          echo ${{ secrets.INVENTORY_HOSTS_STAGING }} >> hosts
       - name: Execute ansible playbook
         run: ansible-playbook --private-key private_key playbook.yml -i hosts -l staging -v
         env:

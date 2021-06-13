@@ -17,3 +17,12 @@ django_secret_key: "{{ vault_django_secret_key }}"
 django_settings_module: "web.settings"
 enable_autothrottle_debug: "true"
 new_relic_log: "stdout"
+
+# NEWRELIC INFRA
+nrinfragent_integrations:
+  - { name: nri-nginx, state: "latest" }
+  - { name: nri-postgresql, state: "latest" }
+nrinfragent_config:
+  license_key: "{{ vault_newrelic_key }}"
+  log_file: /var/log/newrelic-infra/nr-infra.log
+  log_to_stdout: false

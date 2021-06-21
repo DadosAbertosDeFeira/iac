@@ -1,0 +1,24 @@
+
+logs:
+  - name: alternatives.log
+    file: /var/log/alternatives.log
+
+  - name: auth.log
+    file: /var/log/auth.log
+
+  - name: dpkg.log
+    file: /var/log/dpkg.log
+
+  - name: docker-logs
+    file: /var/lib/docker/containers/*/*.log
+  
+  - name: nginx-access-logs
+    file: /var/log/nginx/access.log*
+  
+  - name: nginx-error-logs
+    file: /var/log/nginx/error.log*
+  
+
+
+
+

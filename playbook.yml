@@ -14,10 +14,10 @@
     - iac-role-services
   tasks:
     - name: copying log files config
-      become: true 
+      become: true
       copy:
         src: config_files/logging.yml
-        dest: /etc/newrelic-infra/logging.d      
+        dest: /etc/newrelic-infra/logging.d
         mode: 0644
     - name: create app
       dokku_app:

@@ -14,7 +14,6 @@
     - iac-role-services
   tasks:
     - name: copying log files config
-      become: true
       copy:
         src: config_files/logging.yml
         dest: /etc/newrelic-infra/logging.d

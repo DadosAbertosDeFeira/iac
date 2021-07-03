@@ -1,4 +1,4 @@
-
+---
 logs:
   - name: alternatives.log
     file: /var/log/alternatives.log
@@ -17,8 +17,3 @@ logs:
   
   - name: nginx-error-logs
     file: /var/log/nginx/error.log*
-  
-
-
-
-

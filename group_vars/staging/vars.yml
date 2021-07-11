@@ -18,7 +18,6 @@ django_settings_module: "web.settings"
 enable_autothrottle_debug: "true"
 new_relic_log: "stdout"
 
-
 # NEWRELIC INFRA
 nrinfragent_integrations:
   - { name: nri-nginx, state: "latest" }

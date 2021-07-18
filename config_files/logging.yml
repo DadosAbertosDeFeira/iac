@@ -11,6 +11,8 @@ logs:
 
   - name: docker-logs
     file: /var/lib/docker/containers/*/*.log
+    attributes:
+      logtype: docker
 
   - name: nginx-access-logs
     file: /var/log/nginx/access.log*

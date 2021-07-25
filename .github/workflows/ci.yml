@@ -23,9 +23,11 @@ jobs:
       - name: Create secrets file
         run: |
           echo ${{ secrets.VAULT_SECRET }} >> /tmp/vault_password_file
-      - name: Run linters
+      - name: Run Ansible Lint
         run: |
           ansible-lint
+      - name: Run Yaml Lint
+        run: |
           yamllint .
 
   molecule:

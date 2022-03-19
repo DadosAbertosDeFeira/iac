@@ -9,5 +9,3 @@ exclude_paths:
   - ./.github/
   - ./requirements.yml
   - ./molecule/
-warn_list:  # or 'skip_list' to silence them completely
-  - internal-error

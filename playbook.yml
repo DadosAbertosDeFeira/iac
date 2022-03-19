@@ -28,14 +28,14 @@
         config:
           "{{ apps_config }}"
       when: apps_config is defined
-      #ignore_errors: yes
+      # ignore_errors: yes
     - name: environment configuration vault
       dokku_config:
         app: "{{ app }}"
         config:
           "{{ apps_config_vault }}"
       when: apps_config_vault is defined
-      #ignore_errors: yes
+      # ignore_errors: yes
     - name: Add dokku_service network to mariaquiteria
       command: "dokku network:set {{ app }} attach-post-create dokku_services"
       args:

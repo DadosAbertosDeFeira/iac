@@ -1,9 +1,8 @@
-ansible==2.10.5
-ansible-lint==4.3.7
-docker==4.4.1
-molecule==3.2.2
-molecule-docker==0.2.4
-pytest==6.2.1
+ansible==5.3.0
+docker==4.4.4
 pytest-testinfra==6.1.0
-testinfra==6.0.0
+molecule==3.6.1
+molecule-docker==1.1.0
+ansible-lint==6.0.1
 yamllint==1.25.0
+ansible-core==2.12.2

@@ -11,7 +11,7 @@ apps_config:
   # CLOUDAMQP_URL: "{{ cloudamqp_url }}"
   # CLOUDAMQP_APIKEY: "{{ cloudamqp_apikey }}"
   CITY_COUNCIL_WEBSERVICE: "https://www.transparencia.feiradesantana.ba.leg.br/"
-  CITY_COUNCIL_WEBSERVICE_ENDPOINT:   "http://transparencia.feiradesantana.ba.leg.br/webservice"
+  CITY_COUNCIL_WEBSERVICE_ENDPOINT: "http://transparencia.feiradesantana.ba.leg.br/webservice"
   DJANGO_ALLOWED_HOSTS: ".mq.dadosabertosdefeira.com.br"
   DJANGO_CONFIGURATION: "Prod"
   DJANGO_SETTINGS_MODULE: "web.settings"
@@ -23,7 +23,6 @@ apps_config:
   SENTRY_ENVIRONMENT: "Prod"
   SPIDERMON_SENTRY_ENVIRONMENT_TYPE: "Prod"
   TIKA_CLIENT_ONLY: "1"
-  
 
 # NEWRELIC INFRA
 nrinfragent_integrations:

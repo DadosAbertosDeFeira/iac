@@ -3,7 +3,7 @@
   become: yes
   pre_tasks:
     - name: Atualizando apt cache
-      apt:
+      ansible.builtin.apt:
         update_cache: yes
         cache_valid_time: 600
       when: ansible_os_family == 'Debian'
@@ -14,7 +14,7 @@
     - iac-role-services
   tasks:
     - name: copying log files config
-      copy:
+      ansible.builtin.copy:
         src: config_files/logging.yml
         dest: /etc/newrelic-infra/logging.d
         mode: 0644
@@ -28,16 +28,16 @@
         config:
           "{{ apps_config }}"
       when: apps_config is defined
-      #ignore_errors: yes
+      # ignore_errors: yes
     - name: environment configuration vault
       dokku_config:
         app: "{{ app }}"
         config:
           "{{ apps_config_vault }}"
       when: apps_config_vault is defined
-      #ignore_errors: yes
+      # ignore_errors: yes
     - name: Add dokku_service network to mariaquiteria
-      command: "dokku network:set {{ app }} attach-post-create dokku_services"
+      ansible.builtin.command: "dokku network:set {{ app }} attach-post-create dokku_services"
       args:
         creates: "/tmp/network_dokku_services_mariaquiteria_{{ env }}"
       changed_when: "'molecule-idempotence-notest' not in ansible_skip_tags"

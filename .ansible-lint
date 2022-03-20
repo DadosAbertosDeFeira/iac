@@ -8,3 +8,4 @@ exclude_paths:
   - ./roles/
   - ./.github/
   - ./requirements.yml
+  - ./molecule/

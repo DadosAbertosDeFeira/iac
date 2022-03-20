@@ -5,6 +5,8 @@ ignore: |
   meta/
   roles/
   .venv/
+  group_vars/staging/vault.yml
+  group_vars/production/vault.yml
 
 rules:
   braces:

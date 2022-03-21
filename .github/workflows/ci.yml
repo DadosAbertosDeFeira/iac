@@ -90,7 +90,7 @@ jobs:
           echo "[staging]" >> hosts
           echo ${{ secrets.INVENTORY_HOSTS_STAGING }} >> hosts
       - name: Execute ansible playbook
-        run: ansible-playbook --private-key private_key playbook.yml -i hosts -l staging -v
+        run: ansible-playbook playbook.yml -i hosts -l staging -v --vault-password-file /tmp/vault_password_file
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
 
@@ -126,7 +126,7 @@ jobs:
           echo "[production]" >> hosts
           echo ${{ secrets.INVENTORY_HOSTS }} >> hosts
       - name: Execute ansible playbook
-        run: ansible-playbook --private-key private_key playbook.yml -i hosts -l production -v
+        run: ansible-playbook playbook.yml -i hosts -l production -v --vault-password-file /tmp/vault_password_file
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
 
